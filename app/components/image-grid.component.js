@@ -1,11 +1,12 @@
 import Image from "next/image";
 import noResult from "../images/no-results.svg";
 
-const ImageGrid = ({ photos }) => {
-  console.log(photos, photos.length);
+const ImageGrid = ({ photos, isLoading }) => {
+  const shouldShowPhotos = !isLoading && photos && photos.length > 0;
+  const shouldShowNotFoundError = !isLoading && photos && photos.length <= 0;
   return (
     <>
-      {photos && photos.length > 0 ? (
+      {shouldShowPhotos ? (
         <div className="flex flex-wrap -mx-3 mb-5">
           <div className="w-full max-w-full px-3 mb-6  mx-auto">
             <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5">
@@ -60,7 +61,7 @@ const ImageGrid = ({ photos }) => {
               <div className="flex-auto block py-8 px-5">
                 <div>
                   <div className="flex flex-wrap w-full  justify-center items-center">
-                    {photos.length <= 0 ? (
+                    {shouldShowNotFoundError ? (
                       <div className="block mx-6 mb-5">
                         <Image
                           alt="Not found"
@@ -69,8 +70,8 @@ const ImageGrid = ({ photos }) => {
                           className="inline mr-5"
                         />
                         <span className="text-red-500">
-                          The latest photos for the current day were not found.
-                          Please use the filter to find results.
+                          No photos were found for the current filter. Please
+                          change the filter options to find results.
                         </span>
                       </div>
                     ) : (

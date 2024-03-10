@@ -1,6 +1,15 @@
 export const RoversList = ["Curiosity", "Opportunity", "Spirit"];
 
+export const FilterOptions = ["Earth Day", "Sol"];
+
 export const RoverCameras = [
+  {
+    abbreviation: "All",
+    camera: "all",
+    curiosity: true,
+    opportunity: true,
+    spirit: true,
+  },
   {
     abbreviation: "FHAZ",
     camera: "Front Hazard Avoidance Camera",

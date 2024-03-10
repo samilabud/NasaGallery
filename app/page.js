@@ -2,13 +2,17 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useDebounce } from "@uidotdev/usehooks";
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 import Dropdown from "./components/dropdown.component";
 import { RoversList, FilterOptions, RoverCameras } from "./utils/constants";
 import ImageGrid from "./components/image-grid.component";
-import { getCurrentDate } from "./utils/helpers";
+import { getDateFormated } from "./utils/helpers";
+import space from "./images/space.svg";
 import rightArrow from "./images/right-arrow.svg";
 
-const defaultCurrentDate = getCurrentDate();
+const defaultCurrentDate = getDateFormated(new Date());
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState(null);
@@ -18,7 +22,7 @@ export default function Home() {
     FilterOptions[0]
   );
   const [currentDate, setCurrentDate] = useState(defaultCurrentDate);
-  const debouncedCurrentDate = useDebounce(currentDate, 500);
+  const debouncedCurrentDate = useDebounce(currentDate, 200);
   const [sol, setSol] = useState("2890");
   const debouncedSol = useDebounce(sol, 500);
 
@@ -43,7 +47,7 @@ export default function Home() {
       const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
 
       setIsLoading(true);
-
+      // console.log(url);
       const res = await fetch(
         url,
         // "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
@@ -53,8 +57,12 @@ export default function Home() {
           },
         }
       );
-      const { photos } = await res.json();
-      setPhotos(photos);
+      try {
+        const { photos } = await res.json();
+        setPhotos(photos);
+      } catch (error) {
+        console.log({ error });
+      }
       setIsLoading(false);
     }
     getMarsPhotos();
@@ -79,8 +87,11 @@ export default function Home() {
     return transformedList;
   }, [filterAvailableCameras]);
 
-  const handleSearchByDateChange = (event) => {
-    setCurrentDate(event.target.value);
+  const handleSearchByDateChange = (datePicked) => {
+    const datePickedFormated = getDateFormated(datePicked);
+    if (datePickedFormated.length >= 8) {
+      setCurrentDate(datePickedFormated);
+    }
   };
   const handleSearchBySolChange = (event) => {
     setSol(event.target.value);
@@ -89,7 +100,14 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-16 text-gray-700">
       <div className="relative flex place-items-center flex-wrap">
-        <div className="block w-full text-center">
+        <div className="w-full text-center flex justify-center items-center mb-5">
+          <Image
+            src={space}
+            height={60}
+            width={60}
+            alt="Space"
+            className="mr-5 transition-all duration-1000 hover:scale-110"
+          />
           <h1 className="text-2xl font-semibold" target="_blank">
             NASA - Mars Rover Photos
           </h1>
@@ -123,18 +141,29 @@ export default function Home() {
             <Image src={rightArrow} alt="right arrow" height="30" width="30" />
             {isEarthDayFilterSelected ? (
               <div className="ml-4">
-                <input
+                <DatePicker
+                  onChange={handleSearchByDateChange}
+                  value={currentDate}
+                  className="w-full px-2 py-2 text-gray-800"
+                  format="yyyy-MM-dd"
+                  required
+                  yearPlaceholder="yyyy"
+                  monthPlaceholder="MM"
+                  dayPlaceholder="dd"
+                  clearIcon={null}
+                />
+                {/* <input
                   type="search"
-                  className="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none"
+                  
                   placeholder={"2020-09-22"}
                   value={currentDate}
                   onChange={handleSearchByDateChange}
-                />
+                /> */}
               </div>
             ) : (
               <div className="ml-4">
                 <input
-                  type="search"
+                  type="number"
                   className="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none"
                   placeholder={"2890"}
                   value={sol}

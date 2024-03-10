@@ -1,4 +1,5 @@
 import Image from "next/image";
+import noResult from "../images/no-results.svg";
 
 const ImageGrid = ({ photos }) => {
   console.log(photos, photos.length);
@@ -58,19 +59,34 @@ const ImageGrid = ({ photos }) => {
             <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5">
               <div className="flex-auto block py-8 px-5">
                 <div>
-                  <div className="flex flex-wrap w-full">
-                    {Array.from({ length: 24 }, (_, i) => i + 1).map((val) => (
-                      <div className="mx-6 mb-5" key={val}>
-                        <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
-                          <div className="h-40 rounded bg-gray-300"></div>
-                          <div className="px-6 py-6">
-                            <div className="h-3 bg-gray-300 mb-2"></div>
-                            <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
-                            <div className="h-2 bg-gray-300 w-2/4"></div>
+                  <div className="flex flex-wrap w-full  justify-center items-center">
+                    {photos.length <= 0 ? (
+                      <div className="block mx-6 mb-5">
+                        <Image
+                          alt="Not found"
+                          height={50}
+                          src={noResult}
+                          className="inline mr-5"
+                        />
+                        <span className="text-red-500">
+                          The latest photos for the current day were not found.
+                          Please use the filter to find results.
+                        </span>
+                      </div>
+                    ) : (
+                      Array.from({ length: 24 }, (_, i) => i + 1).map((val) => (
+                        <div className="mx-6 mb-5" key={val}>
+                          <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
+                            <div className="h-40 rounded bg-gray-300"></div>
+                            <div className="px-6 py-6">
+                              <div className="h-3 bg-gray-300 mb-2"></div>
+                              <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
+                              <div className="h-2 bg-gray-300 w-2/4"></div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </div>
               </div>

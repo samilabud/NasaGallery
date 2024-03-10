@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
 import Dropdown from "./components/dropdown.component";
-import { RoversList } from "./utils/consts";
+import { RoversList } from "./utils/constants";
 import ImageGrid from "./components/image-grid.component";
+import { getCurrentDate } from "./utils/helpers";
 
 export default function Home() {
   const [photos, setPhotos] = useState([]);
@@ -10,9 +11,12 @@ export default function Home() {
 
   useEffect(() => {
     async function getMarsPhotos() {
+      const current_date = getCurrentDate();
+      const url = `${process.env.NEXT_PUBLIC_NASA_URL}?earth_date=${current_date}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
+      console.log(url);
       const res = await fetch(
-        // `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`,
-        "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
+        url,
+        // "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
         {
           headers: {
             "Content-Type": "application/json",
@@ -20,7 +24,7 @@ export default function Home() {
         }
       );
       const { photos } = await res.json();
-      setPhotos(photos.slice(0, 24));
+      setPhotos(photos);
     }
     getMarsPhotos();
   }, []);
@@ -32,13 +36,21 @@ export default function Home() {
             NASA - Mars Rover Photos
           </h1>
         </div>
-        <div className="block w-60 z-40 ml-5">
-          <Dropdown
-            label="Rover Cameras"
-            options={RoversList}
-            setSelectedCamera={setSelectedCamera}
-          />
-          <span>{selectedCamera}</span>
+        <div id="filters" className="block w-full">
+          <div className="block w-1/4 z-40 ml-5">
+            <Dropdown
+              label="Rovers"
+              options={RoversList}
+              selectedCamera={selectedCamera}
+              setSelectedCamera={setSelectedCamera}
+            />
+            <Dropdown
+              label="Rover Cameras"
+              options={RoversList}
+              selectedCamera={selectedCamera}
+              setSelectedCamera={setSelectedCamera}
+            />
+          </div>
         </div>
         <div className="block w-full">
           <ImageGrid photos={photos} />

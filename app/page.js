@@ -109,8 +109,7 @@ export default function Home() {
   const handleSearchBySolChange = (event) => {
     setSol(event.target.value);
   };
-  const shouldShowPagination =
-    (photos && photos.length >= 1) || currentPage != 1;
+  const shouldShowPagination = photos && photos.length >= 1;
   const itIsTheLastPage = shouldShowPagination && photos.length < 25;
 
   return (
@@ -156,7 +155,7 @@ export default function Home() {
             </div>
             <Image src={rightArrow} alt="right arrow" height="30" width="30" />
             {isEarthDayFilterSelected ? (
-              <div className="ml-4">
+              <div className="ml-3">
                 <DatePicker
                   onChange={handleSearchByDateChange}
                   value={currentDate}
@@ -189,11 +188,13 @@ export default function Home() {
             <>
               <ImageGrid photos={photos} isLoading={isLoading} />
               {shouldShowPagination && (
-                <Pagination
-                  currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  itIsTheLastPage={itIsTheLastPage}
-                />
+                <div className="ml-5 -mt-8">
+                  <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    itIsTheLastPage={itIsTheLastPage}
+                  />
+                </div>
               )}
             </>
           )}

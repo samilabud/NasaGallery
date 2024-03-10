@@ -9,7 +9,7 @@ const Pagination = ({ currentPage, setCurrentPage, itIsTheLastPage }) => {
     ? [currentPage]
     : Array.from({ length: MAX_PAGES_NUMBER }, (v, i) => i + currentPage);
   return (
-    <div>
+    <div className="w-full">
       <nav>
         <ul className="flex">
           <li>

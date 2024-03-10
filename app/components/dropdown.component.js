@@ -22,7 +22,11 @@ const Dropdown = ({ label, options, setSelectedValue, selectedValue }) => (
       <div className="absolute shadow-lg top-11 left-0 w-full h-max p-2 bg-white border border-zinc-200 rounded-lg flex flex-col gap-2">
         {options.map((option, idx) => (
           <span
-            className="flex flex-row gap-2 items-center hover:bg-zinc-100 p-2 rounded-lg"
+            className={`flex flex-row gap-2 items-center hover:bg-zinc-100 p-2 rounded-lg ${
+              selectedValue.toLowerCase() === option.toLowerCase()
+                ? "bg-zinc-100"
+                : ""
+            }`}
             key={idx}
             onClick={() => setSelectedValue(option.toLowerCase())}
           >

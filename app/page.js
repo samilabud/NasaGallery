@@ -11,10 +11,12 @@ import ImageGrid from "./components/image-grid.component";
 import { getDateFormated } from "./utils/helpers";
 import space from "./images/space.svg";
 import rightArrow from "./images/right-arrow.svg";
+import ErrorMessage from "./components/errormessage.component";
 
 const defaultCurrentDate = getDateFormated(new Date());
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
   const [photos, setPhotos] = useState(null);
   const [selectedRover, setSelectedRover] = useState("curiosity");
   const [selectedCamera, setSelectedCamera] = useState("All Cameras");
@@ -47,21 +49,23 @@ export default function Home() {
       const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
 
       setIsLoading(true);
-      // console.log(url);
-      const res = await fetch(
-        url,
-        // "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      setErrorMessage("");
       try {
+        const res = await fetch(
+          url,
+          // "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
         const { photos } = await res.json();
         setPhotos(photos);
       } catch (error) {
-        console.log({ error });
+        console.error({ error });
+        setErrorMessage("We have problem when fetching NASA API.");
       }
       setIsLoading(false);
     }
@@ -152,13 +156,6 @@ export default function Home() {
                   dayPlaceholder="dd"
                   clearIcon={null}
                 />
-                {/* <input
-                  type="search"
-                  
-                  placeholder={"2020-09-22"}
-                  value={currentDate}
-                  onChange={handleSearchByDateChange}
-                /> */}
               </div>
             ) : (
               <div className="ml-4">
@@ -174,7 +171,11 @@ export default function Home() {
           </div>
         </div>
         <div className="block w-full">
-          <ImageGrid photos={photos} isLoading={isLoading} />
+          {errorMessage ? (
+            <ErrorMessage error={errorMessage} />
+          ) : (
+            <ImageGrid photos={photos} isLoading={isLoading} />
+          )}
         </div>
       </div>
     </main>

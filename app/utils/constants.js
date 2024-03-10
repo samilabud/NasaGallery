@@ -4,8 +4,8 @@ export const FilterOptions = ["Earth Day", "Sol"];
 
 export const RoverCameras = [
   {
-    abbreviation: "All",
-    camera: "all",
+    abbreviation: "All Cameras",
+    camera: "all cameras",
     curiosity: true,
     opportunity: true,
     spirit: true,

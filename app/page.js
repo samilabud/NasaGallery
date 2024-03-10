@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useDebounce } from "@uidotdev/usehooks";
 import Dropdown from "./components/dropdown.component";
@@ -13,6 +13,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [photos, setPhotos] = useState(null);
   const [selectedRover, setSelectedRover] = useState("curiosity");
+  const [selectedCamera, setSelectedCamera] = useState("All Cameras");
   const [selectedFilterOption, setSelectedFilterOption] = useState(
     FilterOptions[0]
   );
@@ -34,7 +35,12 @@ export default function Home() {
       } else {
         filterOption = `earth_date=${defaultCurrentDate}`;
       }
-      const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
+      const cameraFilter =
+        selectedCamera !== "All Cameras"
+          ? `&camera=${selectedCamera.toLowerCase()}`
+          : "";
+
+      const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
 
       setIsLoading(true);
 
@@ -57,7 +63,21 @@ export default function Home() {
     debouncedCurrentDate,
     isEarthDayFilterSelected,
     selectedRover,
+    selectedCamera,
   ]);
+
+  const filterAvailableCameras = useCallback(() => {
+    const filteredRoverCameras = RoverCameras.filter(
+      (val) => val[selectedRover.toLocaleLowerCase()]
+    );
+    return filteredRoverCameras;
+  }, [selectedRover]);
+
+  const getListOfCamerasTransformed = useCallback(() => {
+    const availableCameras = filterAvailableCameras();
+    const transformedList = availableCameras.map((val) => val.abbreviation);
+    return transformedList;
+  }, [filterAvailableCameras]);
 
   const handleSearchByDateChange = (event) => {
     setCurrentDate(event.target.value);
@@ -67,7 +87,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-16 text-gray-700">
+    <main className="flex min-h-screen flex-col items-center justify-start p-16 text-gray-700">
       <div className="relative flex place-items-center flex-wrap">
         <div className="block w-full text-center">
           <h1 className="text-2xl font-semibold" target="_blank">
@@ -86,9 +106,9 @@ export default function Home() {
           <div className="inline w-1/4 z-40 ml-1">
             <Dropdown
               label="Rover Cameras"
-              options={RoversList}
-              selectedValue={selectedRover}
-              setSelectedValue={setSelectedRover}
+              options={getListOfCamerasTransformed()}
+              selectedValue={selectedCamera}
+              setSelectedValue={setSelectedCamera}
             />
           </div>
           <div className="flex w-2/4 ml-1 justify-start">

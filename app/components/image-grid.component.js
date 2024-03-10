@@ -70,8 +70,9 @@ const ImageGrid = ({ photos, isLoading }) => {
                           className="inline mr-5"
                         />
                         <span className="text-red-500">
-                          No photos were found for the current filter. Please
-                          change the filter options to find results.
+                          No photos were found for the current filters or page
+                          selected. Please change the filter options to find
+                          results or go back in pagination.
                         </span>
                       </div>
                     ) : (

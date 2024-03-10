@@ -12,8 +12,10 @@ import { getDateFormated } from "./utils/helpers";
 import space from "./images/space.svg";
 import rightArrow from "./images/right-arrow.svg";
 import ErrorMessage from "./components/errormessage.component";
+import Pagination from "./components/pagination.component";
 
 const defaultCurrentDate = getDateFormated(new Date());
+const defaultCurrentPage = 1;
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -28,11 +30,17 @@ export default function Home() {
   const [sol, setSol] = useState("2890");
   const debouncedSol = useDebounce(sol, 500);
 
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
+  const debouncedPage = useDebounce(currentPage, 500);
+
   const isEarthDayFilterSelected =
     selectedFilterOption.toLocaleLowerCase() === FilterOptions[0].toLowerCase();
 
   useEffect(() => {
     async function getMarsPhotos() {
+      if (!debouncedPage) {
+        return;
+      }
       let filterOption;
       if (debouncedCurrentDate) {
         filterOption = isEarthDayFilterSelected
@@ -42,12 +50,12 @@ export default function Home() {
         filterOption = `earth_date=${defaultCurrentDate}`;
       }
       const cameraFilter =
-        selectedCamera !== "All Cameras"
+        selectedCamera.toLowerCase() !== "all cameras"
           ? `&camera=${selectedCamera.toLowerCase()}`
           : "";
 
-      const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=1&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
-
+      const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=${debouncedPage}&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
+      console.log(url);
       setIsLoading(true);
       setErrorMessage("");
       try {
@@ -76,6 +84,7 @@ export default function Home() {
     isEarthDayFilterSelected,
     selectedRover,
     selectedCamera,
+    debouncedPage,
   ]);
 
   const filterAvailableCameras = useCallback(() => {
@@ -100,6 +109,9 @@ export default function Home() {
   const handleSearchBySolChange = (event) => {
     setSol(event.target.value);
   };
+  const shouldShowPagination =
+    (photos && photos.length >= 1) || currentPage != 1;
+  const itIsTheLastPage = shouldShowPagination && photos.length < 25;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-16 text-gray-700">
@@ -119,7 +131,7 @@ export default function Home() {
         <div id="filters" className="flex mt-10 w-full">
           <div className="inline w-1/4 z-40 ml-5">
             <Dropdown
-              label="Rovers"
+              label="Rover"
               options={RoversList}
               selectedValue={selectedRover}
               setSelectedValue={setSelectedRover}
@@ -127,7 +139,7 @@ export default function Home() {
           </div>
           <div className="inline w-1/4 z-40 ml-1">
             <Dropdown
-              label="Rover Cameras"
+              label="Rover Camera"
               options={getListOfCamerasTransformed()}
               selectedValue={selectedCamera}
               setSelectedValue={setSelectedCamera}
@@ -174,7 +186,16 @@ export default function Home() {
           {errorMessage ? (
             <ErrorMessage error={errorMessage} />
           ) : (
-            <ImageGrid photos={photos} isLoading={isLoading} />
+            <>
+              <ImageGrid photos={photos} isLoading={isLoading} />
+              {shouldShowPagination && (
+                <Pagination
+                  currentPage={currentPage}
+                  setCurrentPage={setCurrentPage}
+                  itIsTheLastPage={itIsTheLastPage}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

@@ -1,3 +1,5 @@
+/** This is a mock data to be used in the unit tests. */
+
 export const mockData = {
   photos: [
     {

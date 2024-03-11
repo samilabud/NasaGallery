@@ -1,3 +1,5 @@
+/** This are the constant values extracted from Mars Rover Photos API doc. */
+
 export const RoversList = ["Curiosity", "Opportunity", "Spirit"];
 
 export const FilterOptions = ["Earth Day", "Sol"];

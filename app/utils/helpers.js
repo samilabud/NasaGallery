@@ -1,3 +1,7 @@
+/**
+ * Get a formated date to being used with datepicker
+ * @param {date} date - The date to be formated.
+ */
 export const getDateFormated = (date) => {
   if (!date) {
     return "";

@@ -59,15 +59,11 @@ export default function Page() {
       setIsLoading(true);
       setErrorMessage("");
       try {
-        const res = await fetch(
-          url,
-          // "https://mocki.io/v1/b2b35bac-cba5-47dc-bcee-472f0facab67",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const res = await fetch(url, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await res.json();
         const { photos } = data;
         setPhotos(photos);

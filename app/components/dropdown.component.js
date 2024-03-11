@@ -37,7 +37,10 @@ const Dropdown = ({ label, options, setSelectedValue, selectedValue }) => (
       </div>
     </button>
 
-    <span className="text-lg font-semibold uppercase ml-6 text-cyan-900">
+    <span
+      aria-label="dropdown-selected-value"
+      className="text-lg font-semibold uppercase ml-6 text-cyan-900"
+    >
       {selectedValue}
     </span>
   </div>

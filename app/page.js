@@ -56,7 +56,6 @@ export default function Page() {
           : "";
 
       const url = `${process.env.NEXT_PUBLIC_NASA_URL}${selectedRover}/photos?${filterOption}${cameraFilter}&page=${debouncedPage}&api_key=${process.env.NEXT_PUBLIC_NASA_API_KEY}`;
-      console.log(url);
       setIsLoading(true);
       setErrorMessage("");
       try {
@@ -69,11 +68,10 @@ export default function Page() {
             },
           }
         );
-
-        const { photos } = await res.json();
+        const data = await res.json();
+        const { photos } = data;
         setPhotos(photos);
       } catch (error) {
-        console.error({ error });
         setErrorMessage("We have problem when fetching NASA API.");
       }
       setIsLoading(false);
@@ -129,7 +127,7 @@ export default function Page() {
           </h1>
         </div>
         <div id="filters" className="flex mt-10 w-full">
-          <div className="inline w-1/4 z-40 ml-5">
+          <div data-testid="rover-filter" className="inline w-1/4 z-40 ml-5">
             <Dropdown
               label="Rover"
               options={RoversList}
@@ -137,7 +135,10 @@ export default function Page() {
               setSelectedValue={setSelectedRover}
             />
           </div>
-          <div className="inline w-1/4 z-40 ml-1">
+          <div
+            data-testid="rover-camera-filter"
+            className="inline w-1/4 z-40 ml-1"
+          >
             <Dropdown
               label="Rover Camera"
               options={getListOfCamerasTransformed()}
@@ -145,7 +146,10 @@ export default function Page() {
               setSelectedValue={setSelectedCamera}
             />
           </div>
-          <div className="flex w-2/4 ml-1 justify-start">
+          <div
+            data-testid="filter-option"
+            className="flex w-2/4 ml-1 justify-start"
+          >
             <div className="inline z-40">
               <Dropdown
                 label="Filter option"

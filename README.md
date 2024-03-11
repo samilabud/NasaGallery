@@ -6,7 +6,7 @@ Technology stack: NextJS, React, Tailwind, CSS3, Jest, RTL, ESLint, Prettier, UX
 
 ## Demo
 
-Youtube link: https://youtu.be/B99D6lZ6vEo
+Youtube link: https://youtu.be/UKOewa5gjd4
 
 ## Environment Variables
 

@@ -38,6 +38,10 @@ export default function Page() {
     selectedFilterOption.toLocaleLowerCase() === FilterOptions[0].toLowerCase();
 
   useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedRover, selectedCamera, selectedFilterOption]);
+
+  useEffect(() => {
     async function getMarsPhotos() {
       if (!debouncedPage) {
         return;
@@ -99,10 +103,12 @@ export default function Page() {
     const datePickedFormated = getDateFormated(datePicked);
     if (datePickedFormated.length >= 8) {
       setCurrentDate(datePickedFormated);
+      setCurrentPage(1);
     }
   };
   const handleSearchBySolChange = (event) => {
     setSol(event.target.value);
+    setCurrentPage(1);
   };
   const shouldShowPagination = photos && photos.length >= 1;
   const itIsTheLastPage = shouldShowPagination && photos.length < 25;

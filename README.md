@@ -1,12 +1,13 @@
 # NASA Gallery - Mars Rover Photos
 
-This is a Gallery of image based on the API designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars. This project makes it possible for anyone (educators, and citizen scientists) to view the photos from anywhere in the world.
+This is a Gallery of photos based on the API designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars. This project makes it possible for anyone (educators, and citizen scientists) to view the photos from anywhere in the world.
 
 Technology stack: NextJS, React, Tailwind, CSS3, Jest, RTL, ESLint, Prettier, UX/UI.
 
 ## Demo
 
 Youtube link: https://youtu.be/UKOewa5gjd4
+Online: https://marsrovergallery.onrender.com/
 
 ## Environment Variables
 

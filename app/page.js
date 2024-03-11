@@ -16,7 +16,8 @@ import Pagination from "./components/pagination.component";
 
 const defaultCurrentDate = getDateFormated(new Date());
 const defaultCurrentPage = 1;
-export default function Home() {
+
+export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [photos, setPhotos] = useState(null);

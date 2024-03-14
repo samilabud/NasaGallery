@@ -1,10 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import DatePicker from "react-date-picker";
 import Dropdown from "../components/dropdown.component";
 import { getDateFormated } from "../utils/helpers";
 import { RoversList, FilterOptions, RoverCameras } from "../utils/constants";
 import rightArrow from "../images/right-arrow.svg";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 const SearchFilters = ({
   selectedRover,
@@ -13,13 +15,14 @@ const SearchFilters = ({
   setSelectedCamera,
   selectedFilterOption,
   setSelectedFilterOption,
-  currentDate,
   setCurrentDate,
   sol,
   setSol,
   isEarthDayFilterSelected,
   setCurrentPage,
 }) => {
+  const [datePickerDate, setDatePickerDate] = useState(new Date());
+
   const filterAvailableCameras = useCallback(() => {
     const filteredRoverCameras = RoverCameras.filter(
       (val) => val[selectedRover.toLocaleLowerCase()]
@@ -37,6 +40,7 @@ const SearchFilters = ({
     const datePickedFormated = getDateFormated(datePicked);
     if (datePickedFormated.length >= 8) {
       setCurrentDate(datePickedFormated);
+      setDatePickerDate(datePicked);
       setCurrentPage(1);
     }
   };
@@ -82,7 +86,7 @@ const SearchFilters = ({
           <div className="ml-3">
             <DatePicker
               onChange={handleSearchByDateChange}
-              value={currentDate}
+              value={datePickerDate}
               className="w-full px-2 py-2 text-gray-800"
               format="yyyy-MM-dd"
               required

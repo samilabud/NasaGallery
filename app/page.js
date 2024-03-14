@@ -2,8 +2,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { useDebounce } from "@uidotdev/usehooks";
-import "react-date-picker/dist/DatePicker.css";
-import "react-calendar/dist/Calendar.css";
 import { FilterOptions } from "./utils/constants";
 import ImageGrid from "./components/image-grid.component";
 import { getDateFormated } from "./utils/helpers";
@@ -119,7 +117,6 @@ export default function Page() {
           setSelectedCamera={setSelectedCamera}
           selectedFilterOption={selectedFilterOption}
           setSelectedFilterOption={setSelectedFilterOption}
-          currentDate={currentDate}
           setCurrentDate={setCurrentDate}
           sol={sol}
           setSol={setSol}

@@ -5,7 +5,7 @@ import marsrovers from "../images/marsrover.svg";
 const Dropdown = ({ label, options, setSelectedValue, selectedValue }) => (
   <div className="flex align-middle w-full items-center">
     <button className="relative group transition-all duration-200 focus:overflow-visible w-44 h-max p-2 overflow-hidden flex flex-row items-center justify-center bg-white gap-3 rounded-lg border border-zinc-200 shadow-sm">
-      <span>{label}</span>
+      <span className="text-nowrap">{label}</span>
       <svg
         className="rotate-90 group-focus:rotate-180"
         xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ const Dropdown = ({ label, options, setSelectedValue, selectedValue }) => (
 
     <span
       aria-label="dropdown-selected-value"
-      className="text-lg font-semibold uppercase ml-6 text-cyan-900"
+      className="text-lg font-semibold uppercase ml-6 text-cyan-900 block text-nowrap pr-1"
     >
       {selectedValue}
     </span>

@@ -11,53 +11,50 @@ const ImageGrid = ({ photos, isLoading }) => {
           data-testid="gallery-container"
           className="flex flex-wrap -mx-3 mb-5"
         >
-          <div className="w-full max-w-full px-3 mb-6  mx-auto">
+          <div className="w-full max-w-full px-3 mb-6 mx-auto">
             <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5 shadow-md">
-              <div className="flex-auto block py-8 px-5">
-                <div>
-                  <div className="flex flex-wrap w-full">
-                    {photos.map((photo) => (
-                      <div
-                        className="flex flex-col mr-5 text-center mb-11 lg:mr-16 justify-center items-center"
-                        key={photo.id}
-                      >
-                        <div className="inline-block mb-4 relative shrink-0 rounded-[.95rem] shadow-lg">
-                          <Image
-                            width={50}
-                            height={50}
-                            alt="Mars photo"
-                            className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
-                            src={photo.img_src}
-                          />
-                        </div>
-                        <div className="text-center">
-                          <span className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out">
-                            {photo.rover.name}
-                          </span>
-                        </div>
-                        <div className="text-left text-xs w-max">
-                          <p className="flex justify-between">
-                            <span className="font-bold">Camera: </span>
-                            <span className="ml-2">{photo.camera.name}</span>
-                            <span className="hidden">
-                              {photo.camera.full_name}
-                            </span>
-                          </p>
-                          <p className="flex justify-between">
-                            <span className="font-bold">
-                              Sol{" "}
-                              <span className="text-xs">(martian day) </span>:
-                            </span>
-                            <span className="ml-2">{photo.sol}</span>
-                          </p>
-                          <p className="flex justify-between">
-                            <span className="font-bold">Earth Date: </span>
-                            <span className="ml-3">{photo.earth_date}</span>
-                          </p>
-                        </div>
+              <div className="flex-auto block py-8 px-3">
+                <div className="flex flex-wrap w-full">
+                  {photos.map((photo) => (
+                    <div
+                      className="flex flex-col w-52 text-center mb-11 justify-start items-center"
+                      key={photo.id}
+                    >
+                      <div className="flex mb-4 relative shrink-0 rounded-[.95rem] shadow-lg ">
+                        <Image
+                          width={50}
+                          height={50}
+                          alt="Mars photo"
+                          className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
+                          src={photo.img_src}
+                        />
                       </div>
-                    ))}
-                  </div>
+                      <div className="text-center">
+                        <span className="text-dark font-semibold hover:text-primary text-[1.25rem] transition-colors duration-200 ease-in-out">
+                          {photo.rover.name}
+                        </span>
+                      </div>
+                      <div className="text-left text-xs w-max">
+                        <p className="flex justify-between">
+                          <span className="font-bold">Camera: </span>
+                          <span className="ml-2">{photo.camera.name}</span>
+                          <span className="hidden">
+                            {photo.camera.full_name}
+                          </span>
+                        </p>
+                        <p className="flex justify-between">
+                          <span className="font-bold">
+                            Sol <span className="text-xs">(martian day) </span>:
+                          </span>
+                          <span className="ml-2">{photo.sol}</span>
+                        </p>
+                        <p className="flex justify-between">
+                          <span className="font-bold">Earth Date: </span>
+                          <span className="ml-3">{photo.earth_date}</span>
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -46,7 +46,7 @@ const SearchFilters = ({
   };
   return (
     <div id="filters" className="flex mt-10 w-full">
-      <div data-testid="rover-filter" className="inline w-1/4 z-40 ml-5">
+      <div data-testid="rover-filter" className="inline z-40 ml-5 min-w-40">
         <Dropdown
           label="Rover"
           options={RoversList}
@@ -54,7 +54,10 @@ const SearchFilters = ({
           setSelectedValue={setSelectedRover}
         />
       </div>
-      <div data-testid="rover-camera-filter" className="inline w-1/4 z-40 ml-1">
+      <div
+        data-testid="rover-camera-filter"
+        className="inline z-40 ml-1 min-w-52"
+      >
         <Dropdown
           label="Rover Camera"
           options={getListOfCamerasTransformed()}

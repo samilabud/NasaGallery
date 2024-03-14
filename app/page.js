@@ -74,7 +74,6 @@ export default function Page() {
           },
         });
         const data = await res.json();
-        console.log(data);
         const { photos } = data;
         setPhotos(photos);
       } catch (error) {
@@ -92,8 +91,10 @@ export default function Page() {
     debouncedPage,
   ]);
 
-  const shouldShowPagination = photos && photos.length >= 1;
-  const itIsTheLastPage = shouldShowPagination && photos.length < 25;
+  const shouldShowPagination =
+    (photos && photos.length >= 1) || currentPage !== 1;
+  const itIsTheLastPage = shouldShowPagination && photos && photos.length < 25;
+  const hidePagination = photos && currentPage === 1 && photos.length < 25;
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-start p-16 text-gray-700">
@@ -132,7 +133,7 @@ export default function Page() {
           ) : (
             <>
               <ImageGrid photos={photos} isLoading={isLoading} />
-              {shouldShowPagination && (
+              {shouldShowPagination && !hidePagination && (
                 <div className="ml-5 -mt-8">
                   <Pagination
                     currentPage={currentPage}

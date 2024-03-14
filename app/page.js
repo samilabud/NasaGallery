@@ -76,6 +76,7 @@ export default function Page() {
           },
         });
         const data = await res.json();
+        console.log(data);
         const { photos } = data;
         setPhotos(photos);
       } catch (error) {

@@ -45,7 +45,7 @@ const SearchFilters = ({
     setCurrentPage(1);
   };
   return (
-    <div id="filters" className="flex mt-10 w-full">
+    <div id="filters" className="flex mt-10 w-full justify-between">
       <div data-testid="rover-filter" className="inline z-40 ml-5 min-w-40">
         <Dropdown
           label="Rover"

@@ -14,24 +14,31 @@ import rightArrow from "./images/right-arrow.svg";
 import ErrorMessage from "./components/errormessage.component";
 import Pagination from "./components/pagination.component";
 
-const defaultCurrentDate = getDateFormated(new Date());
-const defaultCurrentPage = 1;
+const defaultValue = {
+  currentDate: getDateFormated(new Date()),
+  currentPage: 1,
+  sol: "2890",
+  rover: "curiosity",
+  roverCamera: "All Cameras",
+};
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [photos, setPhotos] = useState(null);
-  const [selectedRover, setSelectedRover] = useState("curiosity");
-  const [selectedCamera, setSelectedCamera] = useState("All Cameras");
+  const [selectedRover, setSelectedRover] = useState(defaultValue.rover);
+  const [selectedCamera, setSelectedCamera] = useState(
+    defaultValue.roverCamera
+  );
   const [selectedFilterOption, setSelectedFilterOption] = useState(
     FilterOptions[0]
   );
-  const [currentDate, setCurrentDate] = useState(defaultCurrentDate);
+  const [currentDate, setCurrentDate] = useState(defaultValue.currentDate);
   const debouncedCurrentDate = useDebounce(currentDate, 200);
-  const [sol, setSol] = useState("2890");
+  const [sol, setSol] = useState(defaultValue.sol);
   const debouncedSol = useDebounce(sol, 500);
 
-  const [currentPage, setCurrentPage] = useState(defaultCurrentPage);
+  const [currentPage, setCurrentPage] = useState(defaultValue.currentPage);
   const debouncedPage = useDebounce(currentPage, 500);
 
   const isEarthDayFilterSelected =
@@ -52,10 +59,10 @@ export default function Page() {
           ? `earth_date=${debouncedCurrentDate}`
           : `sol=${debouncedSol}`;
       } else {
-        filterOption = `earth_date=${defaultCurrentDate}`;
+        filterOption = `earth_date=${defaultValue.currentDate}`;
       }
       const cameraFilter =
-        selectedCamera.toLowerCase() !== "all cameras"
+        selectedCamera.toLowerCase() !== defaultValue.roverCamera.toLowerCase()
           ? `&camera=${selectedCamera.toLowerCase()}`
           : "";
 
@@ -179,7 +186,7 @@ export default function Page() {
               <div className="ml-4">
                 <input
                   type="number"
-                  className="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none"
+                  className="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none border-solid border"
                   placeholder={"2890"}
                   value={sol}
                   onChange={handleSearchBySolChange}

@@ -5,8 +5,8 @@ import Dropdown from "../components/dropdown.component";
 import { getDateFormated } from "../utils/helpers";
 import { RoversList, FilterOptions, RoverCameras } from "../utils/constants";
 import rightArrow from "../images/right-arrow.svg";
-import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
+import "./customdatepicker.css";
 
 const SearchFilters = ({
   selectedRover,
@@ -83,24 +83,25 @@ const SearchFilters = ({
         </div>
         <Image src={rightArrow} alt="right arrow" height="30" width="30" />
         {isEarthDayFilterSelected ? (
-          <div className="ml-3">
+          <div className="ml-3 -mb-5">
             <DatePicker
               onChange={handleSearchByDateChange}
               value={datePickerDate}
-              className="w-full px-2 py-2 text-gray-800"
+              className="w-full text-gray-800"
               format="yyyy-MM-dd"
               required
               yearPlaceholder="yyyy"
               monthPlaceholder="MM"
               dayPlaceholder="dd"
               clearIcon={null}
+              maxDate={new Date()}
             />
           </div>
         ) : (
           <div className="ml-4">
             <input
               type="number"
-              className="w-full px-4 py-2 text-gray-800 rounded-full focus:outline-none border-solid border"
+              className="w-28 px-4 py-2 text-gray-800 rounded-md focus:outline-none border-solid border"
               placeholder={"2890"}
               value={sol}
               onChange={handleSearchBySolChange}

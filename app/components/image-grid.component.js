@@ -65,18 +65,18 @@ const ImageGrid = ({ photos, isLoading }) => {
           data-testid="notfound-gallery-container"
           className="flex flex-wrap -mx-3 mb-5"
         >
-          <div className="w-full max-w-full px-3 mb-6  mx-auto">
+          <div className="w-full max-w-full px-3 mb-6 mx-auto">
             <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5">
               <div className="flex-auto block py-8 px-5">
                 <div>
-                  <div className="flex flex-wrap w-full  justify-center items-center">
-                    {shouldShowNotFoundError ? (
-                      <div className="block mx-6 mb-5">
+                  {shouldShowNotFoundError ? (
+                    <div className="flex flex-wrap w-full justify-center items-center">
+                      <div className="flex mx-6">
                         <Image
                           alt="Not found"
                           height={50}
                           src={noResult}
-                          className="inline mr-5"
+                          className="inline mr-5 -mt-2"
                         />
                         <span className="text-red-500">
                           No photos were found for the current filters or page
@@ -84,22 +84,28 @@ const ImageGrid = ({ photos, isLoading }) => {
                           results or go back in pagination.
                         </span>
                       </div>
-                    ) : (
-                      //Skeleton / progress indicator when fetching data
-                      Array.from({ length: 24 }, (_, i) => i + 1).map((val) => (
-                        <div className="mx-6 mb-5" key={val}>
-                          <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
-                            <div className="h-40 rounded bg-gray-300"></div>
-                            <div className="px-6 py-6">
-                              <div className="h-3 bg-gray-300 mb-2"></div>
-                              <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
-                              <div className="h-2 bg-gray-300 w-2/4"></div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-wrap w-full justify-start items-center">
+                      {
+                        //Skeleton / progress indicator when fetching data
+                        Array.from({ length: 25 }, (_, i) => i + 1).map(
+                          (val) => (
+                            <div className="mx-6 mb-5" key={val}>
+                              <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
+                                <div className="h-40 rounded bg-gray-300"></div>
+                                <div className="px-6 py-6">
+                                  <div className="h-3 bg-gray-300 mb-2"></div>
+                                  <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
+                                  <div className="h-2 bg-gray-300 w-2/4"></div>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
+                          )
+                        )
+                      }
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

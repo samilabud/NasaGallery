@@ -18,7 +18,7 @@ const defaultValue = {
   roverCamera: "All Cameras",
 };
 
-export default function Page() {
+export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [photos, setPhotos] = useState(null);

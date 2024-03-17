@@ -49,8 +49,11 @@ const SearchFilters = ({
     setCurrentPage(1);
   };
   return (
-    <div id="filters" className="flex mt-10 w-full justify-between">
-      <div data-testid="rover-filter" className="inline z-40 ml-5 min-w-40">
+    <div
+      id="filters"
+      className="flex mt-10 w-full justify-between flex-wrap px-6"
+    >
+      <div data-testid="rover-filter" className="inline min-w-40 z-40">
         <Dropdown
           label="Rover"
           options={RoversList}
@@ -60,7 +63,7 @@ const SearchFilters = ({
       </div>
       <div
         data-testid="rover-camera-filter"
-        className="inline z-40 ml-1 min-w-52"
+        className="inline min-w-52 z-30 md:pt-1 lg:pt-0 pt-1"
       >
         <Dropdown
           label="Rover Camera"
@@ -71,7 +74,7 @@ const SearchFilters = ({
       </div>
       <div
         data-testid="filter-option"
-        className="flex w-2/4 ml-1 justify-start"
+        className="flex justify-start z-20 screen xl:pt-0 pt-1"
       >
         <div className="inline z-40">
           <Dropdown
@@ -81,9 +84,14 @@ const SearchFilters = ({
             setSelectedValue={setSelectedFilterOption}
           />
         </div>
-        <Image src={rightArrow} alt="right arrow" height="30" width="30" />
+        <Image
+          src={rightArrow}
+          alt="right arrow z-`4`0"
+          height="30"
+          width="30"
+        />
         {isEarthDayFilterSelected ? (
-          <div className="ml-3 -mb-5">
+          <div className="ml-3 -mb-5 z-40 min-w-40">
             <DatePicker
               onChange={handleSearchByDateChange}
               value={datePickerDate}
@@ -98,7 +106,7 @@ const SearchFilters = ({
             />
           </div>
         ) : (
-          <div className="ml-4">
+          <div className="ml-4 z-20">
             <input
               type="number"
               className="w-28 px-4 py-2 text-gray-800 rounded-md focus:outline-none border-solid border"

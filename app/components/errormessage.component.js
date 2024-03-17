@@ -2,11 +2,11 @@ import Image from "next/image";
 import alert from "../images/alert.svg";
 
 const ErrorMessage = ({ error }) => (
-  <div className="flex flex-wrap -mx-3 mb-5">
-    <div className="w-full max-w-full px-3 mb-6  mx-auto">
-      <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5">
-        <div className="flex py-8 px-5 justify-center">
-          <div className="block mx-6 mb-5">
+  <div className="flex w-full">
+    <div className="mb-6">
+      <div className="break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white">
+        <div className="flex flex-col py-8 justify-center">
+          <div className="flex mb-5">
             <Image
               alt="Error warning"
               height={50}

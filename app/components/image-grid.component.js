@@ -63,15 +63,15 @@ const ImageGrid = ({ photos, isLoading }) => {
       ) : (
         <div
           data-testid="notfound-gallery-container"
-          className="flex flex-wrap -mx-3 mb-5"
+          className="flex flex-wrap mb-5 lg:pt-0 pt-1"
         >
-          <div className="w-full max-w-full px-3 mb-6 mx-auto">
-            <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5">
-              <div className="flex-auto block py-8 px-5">
+          <div className="w-full mb-6 mx-auto">
+            <div className="flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white">
+              <div className="flex-auto block py-8 w-full">
                 <div>
                   {shouldShowNotFoundError ? (
                     <div className="flex flex-wrap w-full justify-center items-center">
-                      <div className="flex mx-6">
+                      <div className="flex">
                         <Image
                           alt="Not found"
                           height={50}

@@ -94,8 +94,8 @@ export default function Home() {
   const hidePagination = photos && currentPage === 1 && photos.length < 25;
 
   return (
-    <main className="flex flex-col items-center justify-start p-16 text-gray-700">
-      <div className="relative flex place-items-center flex-wrap">
+    <main className="w-dvw flex py-3 lg:py-16 px-1 text-gray-700">
+      <div className="flex flex-col items-center justify-between w-full min-h-96">
         <Header />
 
         <SearchFilters

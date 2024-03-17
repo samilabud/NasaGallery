@@ -1,16 +1,15 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Image from "next/image";
 import { useDebounce } from "@uidotdev/usehooks";
 import { FilterOptions } from "./utils/constants";
 import ImageGrid from "./components/image-grid.component";
 import { getDateFormated } from "./utils/helpers";
-import space from "./images/space.svg";
+import Header from "./components/header.component";
 import ErrorMessage from "./components/errormessage.component";
 import Pagination from "./components/pagination.component";
 import SearchFilters from "./components/searchfilters.component";
 
-const defaultValue = {
+const defaultValues = {
   currentDate: getDateFormated(new Date()),
   currentPage: 1,
   sol: "2890",
@@ -22,19 +21,19 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [photos, setPhotos] = useState(null);
-  const [selectedRover, setSelectedRover] = useState(defaultValue.rover);
+  const [selectedRover, setSelectedRover] = useState(defaultValues.rover);
   const [selectedCamera, setSelectedCamera] = useState(
-    defaultValue.roverCamera
+    defaultValues.roverCamera
   );
   const [selectedFilterOption, setSelectedFilterOption] = useState(
     FilterOptions[0]
   );
-  const [currentDate, setCurrentDate] = useState(defaultValue.currentDate);
+  const [currentDate, setCurrentDate] = useState(defaultValues.currentDate);
   const debouncedCurrentDate = useDebounce(currentDate, 200);
-  const [sol, setSol] = useState(defaultValue.sol);
+  const [sol, setSol] = useState(defaultValues.sol);
   const debouncedSol = useDebounce(sol, 500);
 
-  const [currentPage, setCurrentPage] = useState(defaultValue.currentPage);
+  const [currentPage, setCurrentPage] = useState(defaultValues.currentPage);
   const debouncedPage = useDebounce(currentPage, 500);
 
   const isEarthDayFilterSelected =
@@ -55,10 +54,10 @@ export default function Home() {
           ? `earth_date=${debouncedCurrentDate}`
           : `sol=${debouncedSol}`;
       } else {
-        filterOption = `earth_date=${defaultValue.currentDate}`;
+        filterOption = `earth_date=${defaultValues.currentDate}`;
       }
       const cameraFilter =
-        selectedCamera.toLowerCase() !== defaultValue.roverCamera.toLowerCase()
+        selectedCamera.toLowerCase() !== defaultValues.roverCamera.toLowerCase()
           ? `&camera=${selectedCamera.toLowerCase()}`
           : "";
 
@@ -95,20 +94,9 @@ export default function Home() {
   const hidePagination = photos && currentPage === 1 && photos.length < 25;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start p-16 text-gray-700">
+    <main className="flex flex-col items-center justify-start p-16 text-gray-700">
       <div className="relative flex place-items-center flex-wrap">
-        <div className="w-full text-center flex justify-center items-center mb-5">
-          <Image
-            src={space}
-            height={60}
-            width={60}
-            alt="Space"
-            className="mr-5 transition-all duration-1000 hover:scale-110"
-          />
-          <h1 className="text-2xl font-semibold" target="_blank">
-            NASA - Mars Rover Photos
-          </h1>
-        </div>
+        <Header />
 
         <SearchFilters
           selectedRover={selectedRover}

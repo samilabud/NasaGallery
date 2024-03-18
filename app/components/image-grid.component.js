@@ -17,7 +17,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                 <div className="flex flex-wrap">
                   {photos.map((photo) => (
                     <div
-                      className="flex flex-col w-52 text-center mb-11 justify-start items-center"
+                      className="flex flex-col w-44 lg:w-52 text-center mb-11 justify-start items-center"
                       key={photo.id}
                     >
                       <div className="flex mb-4 rounded-[.95rem] shadow-lg">
@@ -25,7 +25,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                           width={50}
                           height={50}
                           alt="Mars photo"
-                          className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[150px] h-[150px]"
+                          className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[140px] lg:w-[150px] h-[140px] lg:h-[150px]"
                           src={photo.img_src}
                         />
                       </div>

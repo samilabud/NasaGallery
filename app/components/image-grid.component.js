@@ -63,7 +63,7 @@ const ImageGrid = ({ photos, isLoading }) => {
       ) : (
         <div
           data-testid="notfound-gallery-container"
-          className={`flex flex-wrap mb-2 ${
+          className={`flex flex-wrap mb-2 mt-1 ${
             shouldShowNotFoundError ? "lg:pt-0 pt-1" : "mt-6"
           }`}
         >

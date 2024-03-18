@@ -101,10 +101,10 @@ const SearchFilters = ({
             />
           </div>
         ) : (
-          <div className="ml-4 z-20">
+          <div className="ml-0 z-20 mt-1 lg:mt-0 lg:ml-4">
             <input
               type="number"
-              className="w-28 px-4 py-2 text-gray-800 rounded-md focus:outline-none border-solid border"
+              className="w-20 px-4 py-2 text-gray-800 rounded-md focus:outline-none border-solid border"
               placeholder={"2890"}
               value={sol}
               onChange={handleSearchBySolChange}

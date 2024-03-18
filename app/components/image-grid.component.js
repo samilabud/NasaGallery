@@ -87,13 +87,13 @@ const ImageGrid = ({ photos, isLoading }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-wrap w-full justify-start items-center">
+                  <div className="flex flex-wrap w-full justify-center items-center">
                     {
                       //Skeleton / progress indicator when fetching data
                       Array.from({ length: 25 }, (_, i) => i + 1).map((val) => (
-                        <div className="mx-6 mb-5" key={val}>
-                          <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
-                            <div className="h-40 rounded bg-gray-300"></div>
+                        <div className="w-44 lg:w-52" key={val}>
+                          <div className="max-w-sm rounded overflow-hidden animate-pulse w-36 lg:w-40">
+                            <div className="h-36 lg:h-40 rounded bg-gray-300"></div>
                             <div className="px-6 py-6">
                               <div className="h-3 bg-gray-300 mb-2"></div>
                               <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>

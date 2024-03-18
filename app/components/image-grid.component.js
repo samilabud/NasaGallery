@@ -9,18 +9,18 @@ const ImageGrid = ({ photos, isLoading }) => {
       {shouldShowPhotos ? (
         <div
           data-testid="gallery-container"
-          className="flex flex-wrap -mx-3 mb-5"
+          className="flex flex-wrap mb-5 mt-6"
         >
-          <div className="w-full max-w-full px-3 mb-6 mx-auto">
-            <div className="relative flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white m-5 shadow-md">
-              <div className="flex-auto block py-8 px-3">
-                <div className="flex flex-wrap w-full">
+          <div className="mb-6">
+            <div className="flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white shadow-md">
+              <div className="flex py-8">
+                <div className="flex flex-wrap">
                   {photos.map((photo) => (
                     <div
                       className="flex flex-col w-52 text-center mb-11 justify-start items-center"
                       key={photo.id}
                     >
-                      <div className="flex mb-4 relative shrink-0 rounded-[.95rem] shadow-lg ">
+                      <div className="flex mb-4 rounded-[.95rem] shadow-lg">
                         <Image
                           width={50}
                           height={50}
@@ -34,7 +34,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                           {photo.rover.name}
                         </span>
                       </div>
-                      <div className="text-left text-xs w-max">
+                      <div className="text-left text-xs">
                         <p className="flex justify-between">
                           <span className="font-bold">Camera: </span>
                           <span className="ml-2">{photo.camera.name}</span>
@@ -63,50 +63,48 @@ const ImageGrid = ({ photos, isLoading }) => {
       ) : (
         <div
           data-testid="notfound-gallery-container"
-          className="flex flex-wrap mb-5 lg:pt-0 pt-1"
+          className={`flex flex-wrap mb-2 ${
+            shouldShowNotFoundError ? "lg:pt-0 pt-1" : "mt-6"
+          }`}
         >
-          <div className="w-full mb-6 mx-auto">
+          <div className="w-full mb-6">
             <div className="flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white">
-              <div className="flex-auto block py-8 w-full">
-                <div>
-                  {shouldShowNotFoundError ? (
-                    <div className="flex flex-wrap w-full justify-center items-center">
-                      <div className="flex">
-                        <Image
-                          alt="Not found"
-                          height={50}
-                          src={noResult}
-                          className="inline mr-5 -mt-2"
-                        />
-                        <span className="text-red-500">
-                          No photos were found for the current filters or page
-                          selected. Please change the filter options to find
-                          results or go back in pagination.
-                        </span>
-                      </div>
+              <div className="flex py-8 w-full">
+                {shouldShowNotFoundError ? (
+                  <div className="flex flex-wrap w-full justify-center items-center">
+                    <div className="flex">
+                      <Image
+                        alt="Not found"
+                        height={50}
+                        src={noResult}
+                        className="inline mr-5 -mt-2"
+                      />
+                      <span className="text-red-500">
+                        No photos were found for the current filters or page
+                        selected. Please change the filter options to find
+                        results or go back in pagination.
+                      </span>
                     </div>
-                  ) : (
-                    <div className="flex flex-wrap w-full justify-start items-center">
-                      {
-                        //Skeleton / progress indicator when fetching data
-                        Array.from({ length: 25 }, (_, i) => i + 1).map(
-                          (val) => (
-                            <div className="mx-6 mb-5" key={val}>
-                              <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
-                                <div className="h-40 rounded bg-gray-300"></div>
-                                <div className="px-6 py-6">
-                                  <div className="h-3 bg-gray-300 mb-2"></div>
-                                  <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
-                                  <div className="h-2 bg-gray-300 w-2/4"></div>
-                                </div>
-                              </div>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap w-full justify-start items-center">
+                    {
+                      //Skeleton / progress indicator when fetching data
+                      Array.from({ length: 25 }, (_, i) => i + 1).map((val) => (
+                        <div className="mx-6 mb-5" key={val}>
+                          <div className="max-w-sm rounded overflow-hidden animate-pulse w-40">
+                            <div className="h-40 rounded bg-gray-300"></div>
+                            <div className="px-6 py-6">
+                              <div className="h-3 bg-gray-300 mb-2"></div>
+                              <div className="h-2 bg-gray-300 w-2/3 mb-2"></div>
+                              <div className="h-2 bg-gray-300 w-2/4"></div>
                             </div>
-                          )
-                        )
-                      }
-                    </div>
-                  )}
-                </div>
+                          </div>
+                        </div>
+                      ))
+                    }
+                  </div>
+                )}
               </div>
             </div>
           </div>

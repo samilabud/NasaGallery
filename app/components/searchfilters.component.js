@@ -64,6 +64,7 @@ const SearchFilters = ({
           options={getListOfCamerasTransformed()}
           selectedValue={selectedCamera}
           setSelectedValue={setSelectedCamera}
+          tabindex={2}
         />
       </div>
       <div
@@ -76,6 +77,7 @@ const SearchFilters = ({
             options={FilterOptions}
             selectedValue={selectedFilterOption}
             setSelectedValue={setSelectedFilterOption}
+            tabindex={3}
           />
         </div>
         <Image

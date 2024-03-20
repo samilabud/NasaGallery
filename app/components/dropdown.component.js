@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import marsrovers from "../images/marsrover.svg";
+import { useState } from "react";
 
 const Dropdown = ({
   label,
@@ -8,50 +9,62 @@ const Dropdown = ({
   setSelectedValue,
   selectedValue,
   tabindex = 1,
-}) => (
-  <div className="flex align-middle w-full items-center">
-    <button
-      className="relative group transition-all duration-200 focus:overflow-visible w-44 h-max p-2 overflow-hidden flex flex-row items-center justify-center bg-white gap-3 rounded-lg border border-zinc-200 shadow-sm"
-      tabIndex={tabindex}
-    >
-      <span className="text-nowrap">{label}</span>
-      <svg
-        className="rotate-90 group-focus:rotate-180"
-        xmlns="http://www.w3.org/2000/svg"
-        width="22"
-        height="22"
-        viewBox="0 0 24 24"
-      >
-        <path
-          fill="currentColor"
-          d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275z"
-        />
-      </svg>
-      <div className="absolute shadow-lg top-11 left-0 w-full h-max p-2 bg-white border border-zinc-200 rounded-lg flex flex-col gap-2">
-        {options.map((option, idx) => (
-          <span
-            className={`flex flex-row gap-2 items-center hover:bg-zinc-100 p-2 rounded-lg ${
-              selectedValue.toLowerCase() === option.toLowerCase()
-                ? "bg-zinc-100"
-                : ""
-            }`}
-            key={idx}
-            onClick={() => setSelectedValue(option.toLowerCase())}
-          >
-            <Image src={marsrovers} alt="rover" width={15} height={15} />
-            <p>{option}</p>
-          </span>
-        ))}
-      </div>
-    </button>
+}) => {
+  const [openOptions, setOpenOptions] = useState(false);
 
-    <span
-      aria-label="dropdown-selected-value"
-      className="text-lg font-semibold uppercase ml-2 text-cyan-900 block text-nowrap pr-2"
-    >
-      {selectedValue}
-    </span>
-  </div>
-);
+  const handleSelected = (option) => {
+    setOpenOptions(false);
+    setSelectedValue(option.toLowerCase());
+  };
+
+  return (
+    <div className="flex align-middle w-full items-center">
+      <button
+        className={`relative group transition-all duration-200 ${
+          openOptions ? "overflow-visible" : "overflow-hidden"
+        } w-44 h-max p-2 flex flex-row items-center justify-center bg-white gap-3 rounded-lg border border-zinc-200 shadow-sm`}
+        tabIndex={tabindex}
+        onClick={() => setOpenOptions(!openOptions)}
+      >
+        <span className="text-nowrap">{label}</span>
+        <svg
+          className="rotate-90 group-focus:rotate-180"
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="currentColor"
+            d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275z"
+          />
+        </svg>
+        <div className="absolute shadow-lg top-11 left-0 w-full h-max p-2 bg-white border border-zinc-200 rounded-lg flex flex-col gap-2">
+          {options.map((option, idx) => (
+            <span
+              className={`flex flex-row gap-2 items-center hover:bg-zinc-100 p-2 rounded-lg ${
+                selectedValue.toLowerCase() === option.toLowerCase()
+                  ? "bg-zinc-100"
+                  : ""
+              }`}
+              key={idx}
+              onClick={() => handleSelected(option)}
+            >
+              <Image src={marsrovers} alt="rover" width={15} height={15} />
+              <p>{option}</p>
+            </span>
+          ))}
+        </div>
+      </button>
+
+      <span
+        aria-label="dropdown-selected-value"
+        className="text-lg font-semibold uppercase ml-2 text-cyan-900 block text-nowrap pr-2"
+      >
+        {selectedValue}
+      </span>
+    </div>
+  );
+};
 
 export default Dropdown;

@@ -95,7 +95,7 @@ export default function Home() {
 
   return (
     <main className="flex py-3 lg:py-16 text-gray-700 p-4 lg:p-20">
-      <div className="flex flex-col items-center justify-between w-full min-h-96">
+      <div className="flex flex-col items-center justify-start w-full min-h-96">
         <Header />
 
         <SearchFilters

@@ -11,7 +11,7 @@ const ImageGrid = ({ photos, isLoading }) => {
           data-testid="gallery-container"
           className="flex flex-wrap mb-5 mt-6"
         >
-          <div className="mb-6">
+          <div className="mb-6 w-full">
             <div className="flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white shadow-md">
               <div className="flex py-8">
                 <div className="flex flex-wrap">
@@ -63,9 +63,7 @@ const ImageGrid = ({ photos, isLoading }) => {
       ) : (
         <div
           data-testid="notfound-gallery-container"
-          className={`flex flex-wrap mb-2 mt-1 ${
-            shouldShowNotFoundError ? "lg:pt-0 pt-1" : "mt-6"
-          }`}
+          className={`flex flex-wrap mb-2 mt-6`}
         >
           <div className="w-full mb-6">
             <div className="flex-[1_auto] flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white">
@@ -87,10 +85,10 @@ const ImageGrid = ({ photos, isLoading }) => {
                     </div>
                   </div>
                 ) : (
-                  <div className="flex flex-wrap w-full justify-center items-center">
+                  <div className="flex flex-wrap w-full justify-start items-center ml-6">
                     {
                       //Skeleton / progress indicator when fetching data
-                      Array.from({ length: 25 }, (_, i) => i + 1).map((val) => (
+                      Array.from({ length: 15 }, (_, i) => i + 1).map((val) => (
                         <div className="w-44 lg:w-52" key={val}>
                           <div className="max-w-sm rounded overflow-hidden animate-pulse w-36 lg:w-40">
                             <div className="h-36 lg:h-40 rounded bg-gray-300"></div>

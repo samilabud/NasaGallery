@@ -12,15 +12,15 @@ const ImageGrid = ({ photos, isLoading }) => {
           className="flex flex-wrap mb-5 mt-6"
         >
           <div className="mb-6 w-full">
-            <div className="flex flex-col break-words min-w-0 bg-clip-border rounded-[.95rem] border border-stone-200 bg-white shadow-md">
+            <div className="flex flex-col bg-clip-border rounded-[.95rem] border border-stone-200 bg-white shadow-md">
               <div className="flex py-8">
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap justify-start items-center">
                   {photos.map((photo) => (
                     <div
-                      className="flex flex-col w-44 lg:w-52 text-center mb-11 justify-start items-center"
+                      className="flex flex-col w-44 lg:w-52 justify-center items-center mb-6"
                       key={photo.id}
                     >
-                      <div className="flex mb-4 rounded-[.95rem] shadow-lg">
+                      <div className="rounded-[.95rem] shadow-lg">
                         <Image
                           width={50}
                           height={50}

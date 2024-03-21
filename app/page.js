@@ -40,7 +40,7 @@ export default function Home() {
     selectedFilterOption.toLocaleLowerCase() === FilterOptions[0].toLowerCase();
 
   useEffect(() => {
-    setCurrentPage(1);
+    setCurrentPage(defaultValues.currentPage);
   }, [selectedRover, selectedCamera, selectedFilterOption]);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function Home() {
   const hidePagination = photos && currentPage === 1 && photos.length < 25;
 
   return (
-    <main className="flex py-3 lg:py-16 px-1 text-gray-700">
+    <main className="flex py-3 lg:py-16 text-gray-700 p-4 lg:p-20">
       <div className="flex flex-col items-center justify-between w-full min-h-96">
         <Header />
 

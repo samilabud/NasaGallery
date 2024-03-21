@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import marsrovers from "../images/marsrover.svg";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const Dropdown = ({
   label,
@@ -17,6 +17,22 @@ const Dropdown = ({
     setSelectedValue(option.toLowerCase());
   };
 
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  const handleClick = (event) => {
+    if (buttonRef.current && !buttonRef.current.contains(event.target)) {
+      setOpenOptions(false);
+    }
+  };
+
   return (
     <div className="flex align-middle w-full items-center">
       <button
@@ -25,10 +41,11 @@ const Dropdown = ({
         } w-44 h-max p-2 flex flex-row items-center justify-center bg-white gap-3 rounded-lg border border-zinc-200 shadow-sm`}
         tabIndex={tabindex}
         onClick={() => setOpenOptions(!openOptions)}
+        ref={buttonRef}
       >
         <span className="text-nowrap">{label}</span>
         <svg
-          className="rotate-90 group-focus:rotate-180"
+          className={`${openOptions ? "rotate-180" : "rotate-90"}`}
           xmlns="http://www.w3.org/2000/svg"
           width="22"
           height="22"

@@ -1,9 +1,18 @@
+import { useState } from "react";
 import Image from "next/image";
 import noResult from "../images/no-results.svg";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const ImageGrid = ({ photos, isLoading }) => {
   const shouldShowPhotos = !isLoading && photos && photos.length > 0;
   const shouldShowNotFoundError = !isLoading && photos && photos.length <= 0;
+  const [open, setOpen] = useState(false);
+  const [currentImageOpened, setCurrentImageOpened] = useState("");
+  const handleImageOpened = (currentSrc) => {
+    setCurrentImageOpened(currentSrc);
+    setOpen(true);
+  };
   return (
     <>
       {shouldShowPhotos ? (
@@ -15,7 +24,13 @@ const ImageGrid = ({ photos, isLoading }) => {
             <div className="flex flex-col bg-clip-border rounded-[.95rem] border border-stone-200 bg-white shadow-md">
               <div className="flex py-8">
                 <div className="flex flex-wrap justify-start items-center">
-                  {photos.map((photo) => (
+                  <Lightbox
+                    open={open}
+                    close={() => setOpen(false)}
+                    index={currentImageOpened}
+                    slides={photos.map((photo) => ({ src: photo.img_src }))}
+                  />
+                  {photos.map((photo, idx) => (
                     <div
                       className="flex flex-col w-44 lg:w-52 justify-center items-center mb-6"
                       key={photo.id}
@@ -27,6 +42,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                           alt="Mars photo"
                           className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[140px] lg:w-[150px] h-[140px] lg:h-[150px]"
                           src={photo.img_src}
+                          onClick={() => handleImageOpened(idx)}
                         />
                       </div>
                       <div className="text-center">

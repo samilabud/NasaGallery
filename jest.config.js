@@ -1,6 +1,4 @@
 const nextJest = require("next/jest");
-
-/** @type {import('jest').Config} */
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
   dir: "./",
@@ -10,13 +8,21 @@ const createJestConfig = nextJest({
 const config = {
   coverageProvider: "v8",
   testEnvironment: "jsdom",
-  // Add more setup options before each test is run
-  // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  moduleDirectories: ["node_modules", "<rootDir>/"],
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
-// module.exports = createJestConfig(config);
-module.exports = async () => ({
-  ...(await createJestConfig(config)()),
-  transformIgnorePatterns: ["node_modules/(?!(@uidotdev/usehooks)/)"],
-});
+const getConfig = createJestConfig(config);
+
+module.exports = async () => {
+  const nextJestConfig = await getConfig();
+  const transformIgnorePatterns = [
+    "/node_modules/(?!@uidotdev|yet-another-react-lightbox)",
+    ...nextJestConfig.transformIgnorePatterns.filter(
+      (pattern) => pattern !== "/node_modules/"
+    ),
+  ];
+  return {
+    ...nextJestConfig,
+    transformIgnorePatterns,
+  };
+};

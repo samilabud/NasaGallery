@@ -59,8 +59,17 @@ describe("Page", () => {
     expect(within(galleryContainer).getAllByText("Curiosity").length).toEqual(
       fetchedPhotosCount
     );
-    //Should has all landing labels like => Landing: 2012-08-06
-    expect(within(galleryContainer).getAllByText("2012-08-06").length).toEqual(
+    expect(within(galleryContainer).getAllByText("Camera:").length).toEqual(
+      fetchedPhotosCount
+    );
+    expect(
+      within(galleryContainer).getAllByText("(martian day)").length
+    ).toEqual(fetchedPhotosCount);
+    expect(within(galleryContainer).getAllByText("Earth Date:").length).toEqual(
+      fetchedPhotosCount
+    );
+    //Should has all landing labels like => Earth Date: 2015-05-30
+    expect(within(galleryContainer).getAllByText("2015-05-30").length).toEqual(
       fetchedPhotosCount
     );
 

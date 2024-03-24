@@ -3,7 +3,7 @@ import Image from "next/image";
 import noResult from "../images/no-results.svg";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
-import spaceLoading from "../images/space-loading-image.jpg";
+import spinnerLoading from "../images/spinner-loading.gif";
 
 const ImageGrid = ({ photos, isLoading }) => {
   const shouldShowPhotos = !isLoading && photos && photos.length > 0;
@@ -39,7 +39,8 @@ const ImageGrid = ({ photos, isLoading }) => {
                       <div
                         className="rounded-[.95rem] shadow-lg w-[140px] lg:w-[150px] h-[140px] lg:h-[150px] transition-all duration-1000 ease-in-out"
                         style={{
-                          backgroundImage: `url(${spaceLoading.src})`,
+                          backgroundImage: `url(${spinnerLoading.src})`,
+                          backgroundSize: "cover",
                         }}
                       >
                         <Image

@@ -26,7 +26,7 @@ export default function Home() {
     defaultValues.roverCamera
   );
   const [selectedFilterOption, setSelectedFilterOption] = useState(
-    FilterOptions[0]
+    FilterOptions[1]
   );
   const [currentDate, setCurrentDate] = useState(defaultValues.currentDate);
   const debouncedCurrentDate = useDebounce(currentDate, 200);

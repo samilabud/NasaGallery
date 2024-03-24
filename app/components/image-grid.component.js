@@ -50,6 +50,8 @@ const ImageGrid = ({ photos, isLoading }) => {
                           className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[140px] lg:w-[150px] h-[140px] lg:h-[150px]"
                           src={photo.img_src}
                           onClick={() => handleImageOpened(idx)}
+                          quality={40}
+                          loading="lazy"
                         />
                       </div>
                       <div className="text-center">

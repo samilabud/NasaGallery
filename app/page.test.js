@@ -42,7 +42,7 @@ describe("Page", () => {
     hasDropdownSelectedValue("rover-camera-filter", "ALL CAMERAS");
 
     //Filter option default value
-    hasDropdownSelectedValue("filter-option", "EARTH DAY");
+    hasDropdownSelectedValue("filter-option", "SOL");
   });
 
   it("should fetch data from NASA API", async () => {

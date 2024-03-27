@@ -34,16 +34,23 @@ const Dropdown = ({
   };
 
   return (
-    <div className="flex align-middle w-full items-center">
+    <div className="flex align-middle w-full items-center rounded-lg border bg-white border-zinc-200">
       <button
         className={`relative group transition-all duration-200 ${
           openOptions ? "overflow-visible" : "overflow-hidden"
-        } w-44 h-max p-2 flex flex-row items-center justify-center bg-white gap-3 rounded-lg border border-zinc-200 shadow-sm`}
+        } h-max p-2 flex flex-row items-center justify-center gap-3 w-full`}
         tabIndex={tabindex}
         onClick={() => setOpenOptions(!openOptions)}
         ref={buttonRef}
       >
-        <span className="text-nowrap">{label}</span>
+        <span className="text-nowrap">{label}:</span>
+
+        <span
+          aria-label="dropdown-selected-value"
+          className="text-xs font-semibold uppercase ml-2 text-cyan-900 block text-nowrap pr-2"
+        >
+          {selectedValue}
+        </span>
         <svg
           className={`${openOptions ? "rotate-180" : "rotate-90"}`}
           xmlns="http://www.w3.org/2000/svg"
@@ -73,13 +80,6 @@ const Dropdown = ({
           ))}
         </div>
       </button>
-
-      <span
-        aria-label="dropdown-selected-value"
-        className="text-lg font-semibold uppercase ml-2 text-cyan-900 block text-nowrap pr-2"
-      >
-        {selectedValue}
-      </span>
     </div>
   );
 };

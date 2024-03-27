@@ -50,6 +50,9 @@ const SearchFilters = ({
   };
   return (
     <div id="filters" className="flex mt-10 w-full justify-between flex-wrap">
+      <div className="min-w-full lg:min-w-40">
+        <h4 className="text-2xl mt-1">Filters:</h4>
+      </div>
       <div data-testid="rover-filter" className="min-w-40 z-40">
         <Dropdown
           label="Rover"
@@ -58,7 +61,7 @@ const SearchFilters = ({
           setSelectedValue={setSelectedRover}
         />
       </div>
-      <div data-testid="rover-camera-filter" className="z-30 lg:pt-0 pt-1">
+      <div data-testid="rover-camera-filter" className="z-30 md:pt-0">
         <Dropdown
           label="Rover Camera"
           options={getListOfCamerasTransformed()}
@@ -69,7 +72,7 @@ const SearchFilters = ({
       </div>
       <div
         data-testid="filter-option"
-        className="flex flex-wrap justify-start z-20 lg:pt-0 pt-1"
+        className="flex flex-wrap justify-start z-20 md:pt-0 pt-1"
       >
         <div className="z-40">
           <Dropdown
@@ -85,7 +88,7 @@ const SearchFilters = ({
           alt="right arrow"
           height="30"
           width="30"
-          className="hidden md:block"
+          className="mr-2 md:mr-0"
         />
         {isEarthDayFilterSelected ? (
           <div className="mt-1 ml-0 mb-0 lg:mt-0 lg:ml-3 lg:-mb-5 min-w-40 z-30">

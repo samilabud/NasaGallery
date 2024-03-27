@@ -34,7 +34,11 @@ const Dropdown = ({
   };
 
   return (
-    <div className="flex align-middle w-full items-center rounded-lg border bg-white border-zinc-200">
+    <div
+      className={`flex align-middle w-full items-center rounded-lg border bg-white  ${
+        openOptions ? "border-black" : "border-zinc-200"
+      }`}
+    >
       <button
         className={`relative group transition-all duration-200 ${
           openOptions ? "overflow-visible" : "overflow-hidden"

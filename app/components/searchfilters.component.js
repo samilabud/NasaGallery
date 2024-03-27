@@ -51,7 +51,7 @@ const SearchFilters = ({
   return (
     <div id="filters" className="flex mt-10 w-full justify-between flex-wrap">
       <div className="min-w-full lg:min-w-40">
-        <h4 className="text-2xl mt-1">Filters:</h4>
+        <h4 className="text-2xl mt-1 mr-1">Filters:</h4>
       </div>
       <div data-testid="rover-filter" className="min-w-40 z-40">
         <Dropdown

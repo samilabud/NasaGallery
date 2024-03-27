@@ -114,7 +114,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                     {
                       //Skeleton / progress indicator when fetching data
                       Array.from({ length: 15 }, (_, i) => i + 1).map((val) => (
-                        <div className="w-44 lg:w-52" key={val}>
+                        <div className="w-40 lg:w-52" key={val}>
                           <div className="max-w-sm rounded overflow-hidden animate-pulse w-36 lg:w-40">
                             <div className="h-36 lg:h-40 rounded bg-gray-300"></div>
                             <div className="px-6 py-6">

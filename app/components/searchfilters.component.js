@@ -61,7 +61,7 @@ const SearchFilters = ({
           setSelectedValue={setSelectedRover}
         />
       </div>
-      <div data-testid="rover-camera-filter" className="z-30 pt1 md:pt-0">
+      <div data-testid="rover-camera-filter" className="z-30 pt-1 md:pt-0">
         <Dropdown
           label="Rover Camera"
           options={getListOfCamerasTransformed()}

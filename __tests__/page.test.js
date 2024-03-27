@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { render, screen, within, act } from "@testing-library/react";
-import Page from "./page";
+import Page from "../app/page";
 import "jest-canvas-mock";
 import "jest-fetch-mock";
-import { mockData } from "./utils/mockResponse";
+import { mockData } from "../app/utils/mockResponse";
 
 const mockResponse = mockData;
 
@@ -26,11 +26,11 @@ describe("Page", () => {
     expect(screen.getByText("NASA - Mars Rover Photos"));
     //Rover filter
     const roverFilterContainer = screen.getByTestId("rover-filter");
-    expect(within(roverFilterContainer).getByText("Rover"));
+    expect(within(roverFilterContainer).getByText("Rover:"));
     //Rover camera filter
-    expect(screen.getByText("Rover Camera"));
+    expect(screen.getByText("Rover Camera:"));
     //Earth date or Sol filter option
-    expect(screen.getByText("Filter option"));
+    expect(screen.getByText("Filter option:"));
   });
 
   it("default filter values should be displayed", () => {

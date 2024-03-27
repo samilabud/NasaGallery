@@ -33,11 +33,11 @@ const ImageGrid = ({ photos, isLoading }) => {
                   />
                   {photos.map((photo, idx) => (
                     <div
-                      className="flex flex-col w-44 lg:w-52 justify-center items-center mb-6"
+                      className="flex flex-col w-40 lg:w-52 justify-center items-center mb-6"
                       key={photo.id}
                     >
                       <div
-                        className="rounded-[.95rem] shadow-lg w-[140px] lg:w-[150px] h-[140px] lg:h-[150px] transition-all duration-1000 ease-in-out"
+                        className="rounded-[.95rem] shadow-lg w-[130px] lg:w-[150px] h-[130px] lg:h-[150px] transition-all duration-1000 ease-in-out"
                         style={{
                           backgroundImage: `url(${spinnerLoading.src})`,
                           backgroundSize: "cover",
@@ -47,7 +47,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                           width={50}
                           height={50}
                           alt="Mars photo"
-                          className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[140px] lg:w-[150px] h-[140px] lg:h-[150px]"
+                          className="transition-all duration-1000 ease-in-out hover:scale-110 inline-block shrink-0 rounded-[.95rem] w-[130px] lg:w-[150px] h-[130px] lg:h-[150px]"
                           src={photo.img_src}
                           onClick={() => handleImageOpened(idx)}
                           quality={40}

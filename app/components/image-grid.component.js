@@ -51,7 +51,7 @@ const ImageGrid = ({ photos, isLoading }) => {
                           src={photo.img_src}
                           onClick={() => handleImageOpened(idx)}
                           quality={40}
-                          loading="lazy"
+                          unoptimized
                         />
                       </div>
                       <div className="text-center">

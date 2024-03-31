@@ -38,6 +38,7 @@ const Dropdown = ({
       className={`flex align-middle w-full items-center rounded-lg border bg-white  ${
         openOptions ? "border-black" : "border-zinc-200"
       }`}
+      data-testid="dropdown-list"
     >
       <button
         className={`relative group transition-all duration-200 ${
@@ -67,7 +68,10 @@ const Dropdown = ({
             d="m12 10.8l-3.9 3.9q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7l4.6-4.6q.3-.3.7-.3t.7.3l4.6 4.6q.275.275.275.7t-.275.7q-.275.275-.7.275t-.7-.275z"
           />
         </svg>
-        <div className="absolute shadow-lg top-11 left-0 w-full h-max p-2 bg-white border border-zinc-200 rounded-lg flex flex-col gap-2">
+        <div
+          data-testid="dropdown-list-options"
+          className="absolute shadow-lg top-11 left-0 w-full h-max p-2 bg-white border border-zinc-200 rounded-lg flex flex-col gap-2"
+        >
           {options.map((option, idx) => (
             <span
               className={`flex flex-row gap-2 items-center hover:bg-zinc-100 p-2 rounded-lg ${

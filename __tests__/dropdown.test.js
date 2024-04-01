@@ -1,12 +1,5 @@
 import "@testing-library/jest-dom";
-import {
-  fireEvent,
-  render,
-  screen,
-  within,
-  waitFor,
-  act,
-} from "@testing-library/react";
+import { fireEvent, render, screen, within, act } from "@testing-library/react";
 import Dropdown from "../app/components/dropdown.component";
 import { RoversList } from "../app/utils/constants";
 import userEvent from "@testing-library/user-event";

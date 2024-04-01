@@ -13,8 +13,7 @@ const ErrorMessage = ({ error }) => (
             className="inline mr-5"
           />
           <span className="text-red-500">
-            There was a glitch in the matrix... {error} &nbsp;Please try again
-            later.
+            {`There was a glitch in the matrix... ${error} Please try again later.`}
           </span>
         </div>
       </div>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import rightArrowNavigation from "../images/right-arrow-nav.svg";
 import leftArrowNavigation from "../images/left-arrow-nav.svg";
 
-const MAX_PAGES_NUMBER = 3;
+export const MAX_PAGES_NUMBER = 3;
 
 const Pagination = ({ currentPage, setCurrentPage, itIsTheLastPage }) => {
   const pages = itIsTheLastPage
@@ -31,6 +31,7 @@ const Pagination = ({ currentPage, setCurrentPage, itIsTheLastPage }) => {
                     : "text-blue-gray-500 hover:bg-gray-600 hover:text-white"
                 }`}
                 onClick={() => setCurrentPage(page)}
+                aria-label={`goToPage-${page}`}
               >
                 {page}
               </button>

@@ -4,7 +4,7 @@ import { MAX_PAGES_NUMBER } from "../app/components/pagination.component";
 import Pagination from "../app/components/pagination.component";
 
 describe("Pagination component", () => {
-  it("should render correctly", async () => {
+  it("should render correctly", () => {
     render(
       <Pagination
         currentPage={1}
@@ -22,5 +22,18 @@ describe("Pagination component", () => {
         screen.queryByRole("button", { name: "goToPage-3" })
       ).toBeInTheDocument();
     }
+  });
+  it("should disable prev button if user is in first page", () => {
+    render(
+      <Pagination
+        currentPage={1}
+        setCurrentPage={jest.fn()}
+        itIsTheLastPage={false}
+      />
+    );
+    const previousButton = screen.getByLabelText("Previous");
+    expect(previousButton).toBeDisabled();
+    const nextButton = screen.getByLabelText("Next");
+    expect(nextButton).not.toBeDisabled;
   });
 });

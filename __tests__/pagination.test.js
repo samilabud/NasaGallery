@@ -36,4 +36,20 @@ describe("Pagination component", () => {
     const nextButton = screen.getByLabelText("Next");
     expect(nextButton).not.toBeDisabled;
   });
+  it("Next button should not be in the document if user is in the last page", () => {
+    render(
+      <Pagination
+        currentPage={MAX_PAGES_NUMBER}
+        setCurrentPage={jest.fn()}
+        itIsTheLastPage={true}
+      />
+    );
+    const previousButton = screen.getByLabelText("Previous");
+    expect(previousButton).toBeEnabled();
+    const nextButton = screen.getByRole("button", {
+      name: "Next",
+      hidden: true,
+    });
+    expect(nextButton).toBeDisabled();
+  });
 });

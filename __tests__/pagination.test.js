@@ -23,7 +23,7 @@ describe("Pagination component", () => {
       ).toBeInTheDocument();
     }
   });
-  it("should disable prev button if user is in first page", () => {
+  it("Previous button should be disabled if user is in the first page", () => {
     render(
       <Pagination
         currentPage={1}

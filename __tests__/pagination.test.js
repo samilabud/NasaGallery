@@ -19,7 +19,7 @@ describe("Pagination component", () => {
     //should render the max pages to be displayed
     for (let page = 1; page <= MAX_PAGES_NUMBER; page++) {
       expect(
-        screen.queryByRole("button", { name: "goToPage-3" })
+        screen.queryByRole("button", { name: `goToPage-${page}` })
       ).toBeInTheDocument();
     }
   });

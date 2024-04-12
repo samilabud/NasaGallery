@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { MAX_PAGES_NUMBER } from "../app/components/pagination.component";
 import Pagination from "../app/components/pagination.component";
 
@@ -51,5 +51,22 @@ describe("Pagination component", () => {
       hidden: true,
     });
     expect(nextButton).toBeDisabled();
+  });
+  it("Clicking on number button should change the page to that one", () => {
+    const setCurrentPageFn = jest.fn();
+    const pageFour = 4;
+    render(
+      <Pagination
+        currentPage={MAX_PAGES_NUMBER}
+        setCurrentPage={setCurrentPageFn}
+        itIsTheLastPage={false}
+      />
+    );
+    const btnGoPage1 = screen.getByRole("button", {
+      name: `goToPage-${pageFour}`,
+    });
+    expect(btnGoPage1).toBeInTheDocument();
+    fireEvent.click(btnGoPage1);
+    expect(setCurrentPageFn).toHaveBeenCalledWith(pageFour);
   });
 });

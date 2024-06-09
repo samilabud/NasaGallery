@@ -1,6 +1,6 @@
 # NASA Gallery - Mars Rover Photos
 
-This is a Gallery of photos based on the API designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars. This project makes it possible for anyone (educators, and citizen scientists) to view the photos from anywhere in the world.
+This is a Gallery of photos based on the [API](https://api.nasa.gov/) designed to collect image data gathered by NASA's Curiosity, Opportunity, and Spirit rovers on Mars. This project makes it possible for anyone (educators, and citizen scientists) to view the photos from anywhere in the world.
 
 Technology stack: NextJS, React, Tailwind, CSS3, Jest, RTL, ESLint, Prettier, UX/UI.
 
@@ -29,3 +29,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Running Tests
+
+```bash
+npm run test
+npm run test:watch
+```
